@@ -1,12 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@700&family=Titillium+Web:wght@900&family=Ubuntu:wght@400;700&display=swap');
 
+$primary-dark-color: #0f0f0f;
+$primary-light-color: #ffffff;
+$secondary-color: #e5ff00;
+
+@mixin breakpoint($point) {
+    @if $point == mobile {
+        @media (max-width: 640px) {@content ; }
+    }
+}
 
 html, body {
-    font-family: "Roboto", sans-serif;
+    font-family: "Ubuntu", sans-serif;
     display: flex;
     flex-grow: 1;
     min-width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     font-size: 16px;
     text-align: center;
     box-sizing: border-box;
@@ -15,16 +25,163 @@ html, body {
 }
 
 #root {
-    background: #000;
-    color: #ffffff;
+    background: $primary-dark-color;
+    color: $primary-light-color;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: stretch;
     flex-grow: 1;
     font-size: 1rem;
 }
 
-#sideNav {
-    max-width: 400px;
+.sideNav {
+    height: 100%;
+    width: 20%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: flex-start;
+    align-content: start;
+    align-self: start;
+    background-color: rgb(0, 0, 0, 0.7);
+    font-size: 1.2rem;
+    
+
+    a#home-link {
+        padding-top: 5rem;
+    }
+    
+    a {
+        padding-left: 3rem;
+        line-height: 2rem;
+    }
+}
+
+.about {
+    max-width: 80%;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    text-align: justify;
+    line-height: 1.5rem;
+}
+
+.landing{
+    max-width: 80%;
+    align-content: center;
+    justify-content: center;
+
+   .starwars {
+       font-family: 'Titillium Web',
+       sans-serif;
+       text-transform: capitalize;
+        font-size: 5rem;
+        line-height: 5rem;
+        font-weight: 900;
+        text-shadow: 3px 2px rgba(156, 156, 153);
+        margin: 0 500px;
+        padding: 0;
+    }
+}
+
+.films-container{
+    max-width: 80%;
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    padding: 0 1rem;
+}
+
+
+
+.films-container_data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    min-width: 100%;
+    overflow-x: scroll;
+}
+
+.progressBar {
+    margin-top: 2rem;
+    font-size: 5rem;
+    justify-content: center;
+}
+
+.table {
+    // overflow-y: scroll;
+    padding: 2rem 0;
+
+    table {
+        min-width: 100%;
+    }
+
+    .table-row{
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
+        line-height: 1.5rem;
+    }
+
+    .table-row:nth-child(even) {
+        background: #27272780;
+        border-radius: 5px;
+    }
+    
+    .table-column {
+        min-width: 100px;
+    }
+
+    .tBody {
+        text-align: left;
+    }
+
+    .headRow {
+        font-size: 1.2rem;
+    }
+}
+
+a {
+    text-transform: uppercase;
+    color: $primary-light-color;
+}
+
+.activeLink {
+    color: $secondary-color;
+
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    margin: 0.5rem;
+    min-width: 250px;
+    background:#252525b3;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: left;
+    align-content: stretch;
+}
+
+.card-body {
+    justify-content: start;
+    margin-right: 1rem;
+}
+.card-episode {
+    background: #3d3d3d5b;
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.card-title{
+    text-align: left;
+}
+
+.card-releaseDate {
+    text-align: left;
+}
+
+.error {
     font-size: 2rem;
+    background-color: $secondary-color;
+    color: $primary-dark-color;
 }

@@ -21,55 +21,42 @@ const People: React.FC<{}> = () => {
     const [characters, setCharacters] = useState<[]>([]);
 
     useEffect(() => {
-        const getPeople = async () => await Promise.all(
-            [fetchFilms(), fetchPeople()]
-        );
-        
-        getPeople();
+        fetchPeople();
     }, [episode_id])
 
-    const fetchFilms = async (): Promise<void> => {
+    const fetchPeople = async (): Promise<void> => {
         setLoadingData(true);
 
         await axios
         .get(`${BaseUrl}films/${episode_id}/`)
             .then(response => {
-
-                const characters = response.data.characters;
-
-                setCharacters(characters)
+                setCharacters(response.data.characters);
+                return response.data.characters
             })
+            .then(async (characters) => {
+                const people: Person[] = await Promise.all(characters.map((character: string)  => 
+                    (axios.get(character)
+                        .then(response => {
+                        const person = response.data                
+                            return person
+                        })
+                )))
+                setPeople(people);
+                setLoadingData(false);
+                })
             .catch(error => {
                 setLoadingData(false)
                 setError(error.message)
             })
     }
 
-    const fetchPeople = async (): Promise<void> => {
-        setLoadingData(true);
-
-            const people: Person[] = await Promise.all(characters.map(character => 
-            axios.get(character)
-                .then(response => {
-                const person = response.data                
-                    return person
-                })
-                .catch(error =>{
-                    setLoadingData(false)
-                    setError(error.message)
-                })))
-    
-        setPeople(people);
-        setLoadingData(false);
-    }
-
     return (
-        <div>
-            {loadingData && <LinearProgress color='secondary' />}
+        <div className='people'>
+            {loadingData && <LinearProgress color='secondary' className='progressBar' />}
                 
             {!loadingData && people && <Table people={people} />}
             
-            {!loadingData && error && <p>{error}</p>}
+            {!loadingData && error && <p className='error'>{error}</p>}
         </div>
     )
 }

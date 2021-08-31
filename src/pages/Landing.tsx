@@ -1,10 +1,12 @@
-import React from 'react';
 
 const Landing = () => {
     return (
-        <div>
-            WELCOME TO STAR WARS
-        </div>
+        <>
+            <div className='landing'>
+                <h1 className='starwars'>STAR</h1>
+                <h1 className='starwars'>WARS</h1>
+            </div>
+        </>
     )
 }
 

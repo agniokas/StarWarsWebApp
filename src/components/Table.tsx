@@ -5,25 +5,25 @@ import Person from '../Types';
 const Table: React.FC<{people: Person[]}> = ({people}) => {
     console.log("people table", people)
     return (
-        <div>
+        <div className='table'>
             <table>
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Birth year</th>
-                        <th>Gender</th>
-                        <th>Mass kg</th>
+                    <tr className='table-row headRow'>
+                        <th className='table-column'>#</th>
+                        <th className='table-column'>Name</th>
+                        <th className='table-column'>Birth year</th>
+                        <th className='table-column'>Gender</th>
+                        <th className='table-column'>Mass kg</th>
                     </tr>
                 </thead>
                 <tbody>
                     {people.map((person, index) => { return (
-                        <tr key={index}>
-                            <th>{index + 1}</th>
-                            <td>{person.name}</td>
-                            <th>{person.birth_year}</th>
-                            <td>{person.gender}</td>
-                            <td>{ person.mass} kg</td>
+                        <tr key={index}  className='table-row '>
+                            <th className='table-column'>{index + 1}</th>
+                            <td className='table-column tBody'>{person.name}</td>
+                            <td className='table-column'>{person.birth_year}</td>
+                            <td className='table-column '>{person.gender}</td>
+                            <td className='table-column'>{ person.mass}</td>
                         </tr>
                     )})}
                 </tbody>

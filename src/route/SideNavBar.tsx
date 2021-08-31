@@ -4,18 +4,22 @@ import { NavLink } from 'react-router-dom';
 const SideNavBar: React.FC<{}> = () => {
     return (
         <div className="sideNav">
-            <div>
-                <p>navigation: </p>
-            </div>
+            <NavLink
+                id='home-link'
+                to='/'
+                activeClassName='activeLink'
+            >
+                Home
+            </NavLink>
             <NavLink
                 to='/about'
-                activeStyle={{ fontWeight: "bold", color: "yellow" }}
+                activeClassName='activeLink'
             >
                 About
             </NavLink>
             <NavLink
                 to="/films"
-                activeStyle={{ fontWeight: "bold", color: "yellow" }}
+                activeClassName='activeLink'
             >
                 Films
             </NavLink>

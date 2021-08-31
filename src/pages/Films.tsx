@@ -12,7 +12,7 @@ const BaseUrl = 'https://swapi.dev/api/';
 
 const Films: React.FC<{}> = () => {
     const [films, setFilms] = useState<Films[]>();
-    const [loadingData, setLoadingData] = useState<boolean>(false);
+    const [loadingData, setLoadingData] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
 
 
@@ -37,15 +37,16 @@ const Films: React.FC<{}> = () => {
     }, []);
     
     return (
-        <div>
-            <div>
-                { loadingData && <LinearProgress color='secondary'/> }
+        <div className='films-container'>
+            <div className='films-container_data'>
 
-                {!loadingData && films && films.map((film, index) => <Card key={index} film={film} />)}
+                { loadingData &&  <LinearProgress className='progressBar' color='secondary'/> }
 
-                {!loadingData && error && <p>{error}</p>}
+                { !loadingData && films && films.map((film, index) => <Card key={index} film={film} />) }
+
+                { !loadingData && error && <p className='error'>{error}</p> }
             </div>
-            <div>
+            <div className='films-container_peope'>
                 <Switch>
                     <Route path='/films/:episode_id'><People /></Route>
                 </Switch>
